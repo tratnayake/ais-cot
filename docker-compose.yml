@@ -1,0 +1,18 @@
+version: "3.8"
+
+services:
+  aisstream-tak:
+    build: .
+    image: aisstream-tak:local
+    container_name: aisstream-tak
+    restart: unless-stopped
+    env_file:
+      - .env
+    # TAK Server is on the host LAN — use host networking so the
+    # container can reach it at its LAN IP directly.
+    network_mode: host
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
